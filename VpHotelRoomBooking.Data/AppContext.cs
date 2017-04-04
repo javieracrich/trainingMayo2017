@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-
-using System;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 using VpHotelRoomBooking.Domain;
 
 namespace VpHotelRoomBooking.Data
@@ -11,11 +11,15 @@ namespace VpHotelRoomBooking.Data
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<Room> Rooms { get; set; }
 
-
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var cnn = @"Server=.\sqlexpress;Database=VpTrainingMayo;Trusted_Connection=True;";
+            var config = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .Build();
+
+            var cnn = config.GetConnectionString("DefaultConnection");
+
             optionsBuilder.UseSqlServer(cnn);
         }
 

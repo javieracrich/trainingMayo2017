@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VpHotelRoomBooking.Data\VpHotelRoomBooking.Data.csproj" />
+    <ProjectReference Include="..\VpHotelRoomBooking.Services\VpHotelRoomBooking.Services.csproj" />
   </ItemGroup>
 
 </Project>

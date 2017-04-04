@@ -2,9 +2,9 @@
 
 namespace VpHotelRoomBooking.Domain
 {
-    public class Booking
+    public class Booking:BaseEntity
     {
-        public int Id { get; set; }
+
         public DateTime CheckIn { get; set; }
         public DateTime CheckOut { get; set; }
         public string FirstName { get; set; }

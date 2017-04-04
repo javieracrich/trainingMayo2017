@@ -3,12 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using VpHotelRoomBooking.Services;
 
 namespace VpHotelRoomBooking.Api.Controllers
 {
     [Route("api/[controller]")]
-    public class ValuesController : Controller
+    public class RoomController : Controller
     {
+        IGenericService _service;
+        public RoomController(IGenericService service)
+        {
+            _service = service;
+        }
+
+
         // GET api/values
         [HttpGet]
         public IEnumerable<string> Get()

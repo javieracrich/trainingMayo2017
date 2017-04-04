@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,6 +29,9 @@ namespace VpHotelRoomBooking.Api
             services.AddMvc();
             var cnn = ConfigurationExtensions.GetConnectionString(this.Configuration, "DefaultConnection"); 
             services.AddDbContext<VpAppContext>(options => options.UseSqlServer(cnn));
+
+            services.AddScoped<Services.IUnitOfWork, Services.UnitOfWork>();
+            services.AddScoped<Services.IGenericService, Services.GenericService>();
         }
 
 

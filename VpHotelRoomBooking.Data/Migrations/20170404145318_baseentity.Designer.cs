@@ -8,9 +8,10 @@ using VpHotelRoomBooking.Data;
 namespace VpHotelRoomBooking.Data.Migrations
 {
     [DbContext(typeof(VpAppContext))]
-    partial class VpAppContextModelSnapshot : ModelSnapshot
+    [Migration("20170404145318_baseentity")]
+    partial class baseentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")
