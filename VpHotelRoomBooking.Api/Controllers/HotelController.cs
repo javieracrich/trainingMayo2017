@@ -17,34 +17,31 @@ namespace VpHotelRoomBooking.Api.Controllers
         [HttpGet]
         public IEnumerable<Hotel> Get()
         {
-            var hotels = _service.GetAll<Hotel>();
-            return hotels;
+            return _service.GetAll<Hotel>();
         }
 
         [HttpGet("{id}")]
         public Hotel Get(int id)
         {
-            var hotel = _service.Get<Hotel>(id);
-            return hotel;
+            return _service.Get<Hotel>(id);
         }
 
         [HttpPost]
         public int Post(Hotel hotel)
         {
-            return _service.Update<Hotel>(hotel);
+            return 0;
         }
 
         [HttpPut("{id}")]
         public int Put(Hotel hotel)
         {
-            return _service.Create<Hotel>(hotel);
+            return _service.Create(hotel);
         }
 
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            var hotel = _service.Get<Hotel>(id);
-            _service.Delete(hotel);
+   
         }
     }
 }
