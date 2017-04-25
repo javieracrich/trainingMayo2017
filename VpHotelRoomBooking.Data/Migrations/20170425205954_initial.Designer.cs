@@ -8,9 +8,10 @@ using VpHotelRoomBooking.Data;
 namespace VpHotelRoomBooking.Data.Migrations
 {
     [DbContext(typeof(VpAppContext))]
-    partial class VpAppContextModelSnapshot : ModelSnapshot
+    [Migration("20170425205954_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")
@@ -33,9 +34,13 @@ namespace VpHotelRoomBooking.Data.Migrations
 
                     b.Property<string>("LastName");
 
+                    b.Property<int?>("RoomId");
+
                     b.Property<DateTime?>("Updated");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RoomId");
 
                     b.ToTable("Bookings");
                 });
@@ -78,6 +83,13 @@ namespace VpHotelRoomBooking.Data.Migrations
                     b.HasIndex("HotelId");
 
                     b.ToTable("Rooms");
+                });
+
+            modelBuilder.Entity("VpHotelRoomBooking.Domain.Booking", b =>
+                {
+                    b.HasOne("VpHotelRoomBooking.Domain.Room", "Room")
+                        .WithMany()
+                        .HasForeignKey("RoomId");
                 });
 
             modelBuilder.Entity("VpHotelRoomBooking.Domain.Room", b =>

@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using VpHotelRoomBooking.Data;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace VpHotelRoomBooking.Api
 {
@@ -12,12 +13,12 @@ namespace VpHotelRoomBooking.Api
     {
         public Startup(IHostingEnvironment env)
         {
-            var builder = new ConfigurationBuilder()
+            Configuration = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddEnvironmentVariables();
-            Configuration = builder.Build();
+                .AddEnvironmentVariables()
+                .Build();
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -25,10 +26,12 @@ namespace VpHotelRoomBooking.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            VpAppContext.isMigration = false;
+
             // Add framework services.
-            services.AddMvc();
-            var cnn = ConfigurationExtensions.GetConnectionString(this.Configuration, "DefaultConnection"); 
-            services.AddDbContext<VpAppContext>(options => options.UseSqlServer(cnn));
+            services.AddMvc();       
+            services.AddEntityFrameworkSqlServer().AddDbContext<VpAppContext>();
 
             services.AddScoped<Services.IUnitOfWork, Services.UnitOfWork>();
             services.AddScoped<Services.IGenericService, Services.GenericService>();
