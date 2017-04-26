@@ -3,9 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.EntityFrameworkCore;
 using VpHotelRoomBooking.Data;
-using Microsoft.EntityFrameworkCore.Infrastructure;
+
 
 namespace VpHotelRoomBooking.Api
 {
@@ -26,8 +25,6 @@ namespace VpHotelRoomBooking.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            VpAppContext.isMigration = false;
 
             // Add framework services.
             services.AddMvc();       
